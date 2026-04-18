@@ -1,7 +1,8 @@
 💸 FlowIQ — Smart Cash Flow Tracker
 
 FlowIQ is a modern, AI-powered cash flow management web application built for the Micathon’26 “Money Moves” theme. It enables individuals and small businesses to track, analyze, and predict their financial movement in real-time, turning complex data into clear, actionable insights.
-live demo:flowiq-two.vercel.app
+
+live demo: flowiq-two.vercel.app
 
 🚀 Core Features
 💼 Smart Onboarding
