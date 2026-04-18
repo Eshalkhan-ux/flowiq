@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)file:///Users/apple/Desktop/FlowIQ%20%E2%80%94%20AI%20Cash%20Flow%20Intelligence2.htm -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowIQ — AI Cash Flow Intelligence</title>
+
+<link href="./FlowIQ — AI Cash Flow Intelligence3_files/css2" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════
+   VARIABLES & RESET
+══════════════════════════════════════════ */
+:root {
+  --dark:    #0A1628;
+  --darker:  #061020;
+  --card:    #0D1F35;
+  --card2:   #112240;
+  --teal:    #028090;
+  --accent:  #02C39A;
+  --accent2: #00E5B0;
+  --white:   #ffffff;
+  --muted:   #64B5C8;
+  --dim:     #3A6070;
+  --danger:  #EF4444;
+  --warn:    #F59E0B;
+  --green:   #22C55E;
+  --border:  rgba(2,192,154,0.15);
+  --border2: rgba(2,192,154,0.30);
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--dark);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Dot-grid background */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(2,192,154,0.03) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(2,192,154,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events:none; z-index:0;
+}
+
+/* ══════════════════════════════════════════
+   LAYOUT WRAPPER
+══════════════════════════════════════════ */
+.app {
+  position:relative; z-index:1;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ══════════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════════ */
+nav {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 22px 0 26px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--accent); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(2,192,154,0.1);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+.nav-reset {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-reset:hover { color: var(--danger); border-color: rgba(239,68,68,0.4); }
+
+/* ══════════════════════════════════════════
+   SETUP SCREEN
+══════════════════════════════════════════ */
+#setup-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 72vh;
+  text-align: center;
+  gap: 24px;
+}
+
+.setup-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 22px;
+  padding: 40px 40px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+}
+
+/* ── Setup section divider ── */
+.setup-section {
+  border-top: 1px solid var(--border);
+  margin: 20px 0 18px;
+}
+
+/* ── Upload bank statement area ── */
+.upload-area {
+  border: 1.5px dashed var(--border2);
+  border-radius: 12px;
+  padding: 18px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  background: var(--darker);
+  position: relative;
+  margin-bottom: 6px;
+}
+.upload-area:hover { border-color: var(--accent); background: rgba(2,192,154,0.04); }
+.upload-area input[type="file"] {
+  position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.upload-icon { font-size: 26px; margin-bottom: 6px; }
+.upload-text { font-size: 13px; color: var(--muted); }
+.upload-text span { color: var(--accent); font-weight: 600; }
+.upload-name {
+  font-size: 11px; color: var(--accent); margin-top: 6px;
+  display: none; font-weight: 600; letter-spacing: 0.3px;
+}
+.upload-hint { font-size: 11px; color: var(--dim); margin-top: 4px; }
+
+/* ── AI parsed result from statement ── */
+.parsed-result {
+  background: rgba(2,192,154,0.06);
+  border: 1px solid rgba(2,192,154,0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  display: none;
+  text-align: left;
+  line-height: 1.6;
+}
+.parsed-result.show { display: block; }
+.parsed-result strong { color: var(--accent); }
+
+/* ── Total balance display ── */
+.total-balance-box {
+  background: rgba(2,192,154,0.08);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.total-balance-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.total-balance-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+/* ── AI Help Button (floating) ── */
+.ai-help-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 54px;
+  height: 54px;
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(2,192,154,0.4);
+  z-index: 999;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ai-help-btn:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(2,192,154,0.5); }
+
+/* ── AI Chat Panel ── */
+.ai-chat-panel {
+  position: fixed;
+  bottom: 94px;
+  right: 28px;
+  width: 320px;
+  max-height: 440px;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  z-index: 998;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: chatSlide 0.25s ease;
+}
+.ai-chat-panel.open { display: flex; }
+@keyframes chatSlide {
+  from { opacity:0; transform:translateY(16px) scale(0.97); }
+  to   { opacity:1; transform:translateY(0) scale(1); }
+}
+
+.ai-chat-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ai-chat-avatar {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--accent), #028090);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.ai-chat-name { font-size: 13px; font-weight: 700; }
+.ai-chat-status { font-size: 10px; color: var(--accent); }
+.ai-chat-close {
+  margin-left: auto;
+  background: none; border: none; color: var(--dim);
+  font-size: 18px; cursor: pointer; padding: 2px 6px;
+  border-radius: 6px; transition: color 0.15s;
+}
+.ai-chat-close:hover { color: var(--danger); }
+
+.ai-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ai-chat-messages::-webkit-scrollbar { width: 3px; }
+.ai-chat-messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.chat-msg {
+  max-width: 88%;
+  padding: 9px 13px;
+  border-radius: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  animation: fadeIn 0.2s ease;
+}
+.chat-msg.ai {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  color: var(--white);
+  align-self: flex-start;
+  border-radius: 4px 12px 12px 12px;
+}
+.chat-msg.user {
+  background: rgba(2,192,154,0.12);
+  border: 1px solid rgba(2,192,154,0.2);
+  color: var(--white);
+  align-self: flex-end;
+  border-radius: 12px 4px 12px 12px;
+}
+.chat-msg.error-msg {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #F87171;
+  align-self: flex-start;
+}
+.chat-typing {
+  font-size: 12px;
+  color: var(--dim);
+  padding: 4px 6px;
+  display: none;
+}
+.chat-typing.show { display: block; }
+
+.ai-chat-input-row {
+  padding: 10px 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.ai-chat-input {
+  flex: 1;
+  background: var(--darker);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 12px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ai-chat-input:focus { border-color: var(--accent); }
+.ai-chat-send {
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 13px;
+  color: var(--darker);
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.ai-chat-send:hover { background: var(--accent2); }
+
+.setup-icon { font-size: 52px; margin-bottom: 18px; display: block; }
+
+.setup-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.3px;
+}
+
+.setup-sub {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 30px;
+}
+
+.setup-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.setup-input-wrap { position: relative; margin-bottom: 22px; }
+
+.pkr-prefix {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.setup-input {
+  width: 100%;
+  background: var(--darker);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 16px 18px 16px 58px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -moz-appearance: textfield;
+}
+.setup-input::-webkit-outer-spin-button,
+.setup-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.setup-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(2,192,154,0.12);
+}
+
+.setup-hint {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--accent);
+  color: var(--darker);
+  border: none;
+  border-radius: 14px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.btn-primary:hover {
+  background: var(--accent2);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(2,192,154,0.28);
+}
+
+/* ══════════════════════════════════════════
+   MAIN SCREEN
+══════════════════════════════════════════ */
+#main-screen { display: none; }
+
+/* ── WhatsApp Quick Entry Bar ── */
+.wa-bar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wa-icon { font-size: 22px; flex-shrink: 0; }
+
+.wa-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.wa-input-wrap { flex: 1; }
+
+.wa-input {
+  width: 100%;
+  background: var(--darker);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.wa-input:focus { border-color: var(--accent); }
+.wa-input::placeholder { color: var(--dim); }
+
+.wa-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  color: var(--darker);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.wa-btn:hover { background: var(--accent2); transform: scale(0.97); }
+
+/* ── Stats Row ── */
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.2s;
+}
+.stat-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+.stat-card::before {
+  content:'';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 16px 16px 0 0;
+}
+.stat-card.balance::before { background: var(--accent); }
+.stat-card.income::before  { background: var(--green); }
+.stat-card.expense::before { background: var(--danger); }
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.stat-value {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.stat-value.teal  { color: var(--accent); }
+.stat-value.green { color: #4ADE80; }
+.stat-value.red   { color: #F87171; }
+
+.stat-sub { font-size: 11px; color: var(--dim); margin-top: 6px; }
+
+/* ── Forecast Banner ── */
+.forecast-banner {
+  border-radius: 14px;
+  padding: 16px 22px;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid;
+  transition: all 0.35s ease;
+  flex-wrap: wrap;
+}
+.forecast-banner.safe   { background:rgba(34,197,94,0.07);  border-color:rgba(34,197,94,0.3); }
+.forecast-banner.warn   { background:rgba(245,158,11,0.07); border-color:rgba(245,158,11,0.3); }
+.forecast-banner.danger { background:rgba(239,68,68,0.07);  border-color:rgba(239,68,68,0.3); }
+
+.forecast-icon { font-size: 26px; flex-shrink: 0; }
+
+.forecast-text { flex: 1; min-width: 160px; }
+
+.forecast-title { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.forecast-banner.safe   .forecast-title { color: #4ADE80; }
+.forecast-banner.warn   .forecast-title { color: #FCD34D; }
+.forecast-banner.danger .forecast-title { color: #F87171; }
+
+.forecast-detail { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.forecast-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.forecast-banner.safe   .forecast-val { color: #4ADE80; }
+.forecast-banner.warn   .forecast-val { color: #FCD34D; }
+.forecast-banner.danger .forecast-val { color: #F87171; }
+
+/* ── Two Column Layout ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 14px;
+  align-items: start;
+}
+
+/* ── Panel ── */
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+}
+
+.panel-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ── Type Toggle ── */
+.type-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+
+.type-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--darker);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+}
+.type-btn:hover { border-color: var(--border2); }
+.type-btn.active.income  { background: rgba(34,197,94,0.12);  border-color: rgba(34,197,94,0.5);  color: #4ADE80; }
+.type-btn.active.expense { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.5); color: #F87171; }
+
+/* ── Form Fields ── */
+.field { margin-bottom: 12px; }
+
+.field label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dim);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  background: var(--darker);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  font-size: 13px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+}
+.field input:focus,
+.field select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(2,192,154,0.08);
+}
+.field select option { background: var(--card); }
+
+.amount-wrap { position: relative; }
+.amount-wrap .pfx {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  pointer-events: none;
+}
+.amount-wrap input {
+  padding-left: 44px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* AI hint */
+.ai-hint {
+  background: rgba(2,192,154,0.06);
+  border: 1px solid rgba(2,192,154,0.18);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  display: none;
+  animation: fadeIn 0.2s ease;
+}
+.ai-hint.show { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+
+.btn-add {
+  width: 100%;
+  background: var(--accent);
+  color: var(--darker);
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s;
+  margin-top: 6px;
+}
+.btn-add:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(2,192,154,0.25); }
+
+/* ── Transaction List ── */
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+.tx-list::-webkit-scrollbar { width: 3px; }
+.tx-list::-webkit-scrollbar-track { background: transparent; }
+.tx-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  animation: slideIn 0.22s ease;
+  transition: border-color 0.15s;
+}
+.tx-item:hover { border-color: var(--border2); }
+
+@keyframes slideIn {
+  from { opacity:0; transform:translateX(8px); }
+  to   { opacity:1; transform:translateX(0); }
+}
+
+.tx-cat-badge {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.tx-info { flex: 1; min-width: 0; }
+
+.tx-desc {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--white);
+}
+
+.tx-meta {
+  font-size: 10px;
+  color: var(--dim);
+  margin-top: 3px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.tx-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.tx-amount.income  { color: #4ADE80; }
+.tx-amount.expense { color: #F87171; }
+
+.tx-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dim);
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.tx-delete:hover { color: var(--danger); background: rgba(239,68,68,0.08); }
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  padding: 34px 20px;
+  color: var(--dim);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.empty-icon { font-size: 34px; margin-bottom: 10px; opacity: 0.45; }
+
+/* ── Category Breakdown ── */
+.cat-breakdown {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: none;
+}
+
+.cat-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.cat-bar-item { margin-bottom: 10px; }
+
+.cat-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.cat-bar-label { color: var(--muted); font-weight: 500; }
+.cat-bar-val   { color: var(--white); font-weight: 600; font-family: 'Syne', sans-serif; }
+
+.cat-bar-track {
+  height: 5px;
+  background: var(--darker);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cat-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 26px;
+  right: 26px;
+  z-index: 999;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 13px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+  transform: translateY(80px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+  max-width: 280px;
+}
+.toast.show    { transform: translateY(0); opacity: 1; }
+.toast.success { border-color: rgba(34,197,94,0.4);  color: #4ADE80; }
+.toast.error   { border-color: rgba(239,68,68,0.4);  color: #F87171; }
+
+/* ── Responsive ── */
+@media (max-width: 660px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stats .stat-card:last-child { grid-column: 1 / -1; }
+  .two-col { grid-template-columns: 1fr; }
+  .forecast-banner { flex-wrap: wrap; }
+  .wa-bar { flex-wrap: wrap; gap: 10px; }
+  .wa-label { display: none; }
+  .setup-card { padding: 30px 22px; }
+}
+
+@media (max-width: 400px) {
+  .stats { grid-template-columns: 1fr; }
+  .stats .stat-card:last-child { grid-column: auto; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ══ NAVBAR ══ -->
+  <nav>
+    <div class="logo">Flow<span>IQ</span></div>
+    <div class="nav-right">
+      <div class="nav-badge">AI Cash Flow</div>
+      <button class="nav-reset" onclick="resetApp()" id="reset-btn" style="display: none;">↺ Reset</button>
+    </div>
+  </nav>
+
+  <!-- ══ SETUP SCREEN ══ -->
+  <div id="setup-screen" style="display: flex;">
+    <div class="setup-card">
+      <span class="setup-icon">💼</span>
+      <div class="setup-title">Welcome to FlowIQ</div>
+      <div class="setup-sub">Enter your cash details below — we'll calculate your total opening balance automatically.</div>
+
+      <!-- STEP 1 label -->
+      <label class="setup-label" style="margin-top:4px">Step 1 · Enter Your Cash Details</label>
+
+      <!-- STEP 2: Upload Bank Statement -->
+      <label class="setup-label" style="margin-top:2px">Step 2 · Upload Bank Statement <span style="color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">(Last Month · PDF or Image)</span></label>
+      <div class="upload-area" id="upload-area" style="">
+        <input type="file" id="stmt-file" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFileUpload(event)">
+        <div class="upload-icon">📄</div>
+        <div class="upload-text">Drag &amp; drop or <span>click to browse</span></div>
+        <div class="upload-hint">Accepts PDF, PNG, JPG — last month's statement</div>
+        <div class="upload-name" id="upload-name" style="display: none;">✓ HBL_Statement_March2025.pdf</div>
+      </div>
+      <div class="parsed-result" id="parsed-result">
+        🤖 <strong>AI Reading Statement:</strong> <span id="parsed-text">Detected closing balance: <strong style="color:var(--accent)">PKR 1,85,000</strong> · Account: HBL ****4821 · Period: Last Month</span>
+      </div>
+
+      <!-- STEP 3: Cash in Hand -->
+      <div class="setup-section"></div>
+      <label class="setup-label">Step 3 · Cash in Hand (PKR)</label>
+      <div class="setup-input-wrap">
+        <span class="pkr-prefix">PKR</span>
+        <input class="setup-input" type="number" id="cash-in-hand" placeholder="0" min="0" step="500" oninput="calcTotal()" style="font-size:20px;padding:14px 16px 14px 58px">
+      </div>
+
+      <!-- Bank Balance -->
+      <label class="setup-label">Bank Account Balance (PKR) <span style="color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">— auto-filled from statement or enter manually</span></label>
+      <div class="setup-input-wrap">
+        <span class="pkr-prefix">PKR</span>
+        <input class="setup-input" type="number" id="bank-balance" placeholder="0" min="0" step="500" oninput="calcTotal()" style="font-size:20px;padding:14px 16px 14px 58px">
+      </div>
+
+      <!-- TOTAL OPENING BALANCE (auto-calculated) -->
+      <div class="total-balance-box">
+        <div>
+          <div class="total-balance-label">Total Opening Balance</div>
+          <div style="font-size:11px;color:var(--dim);margin-top:2px">Cash in Hand + Bank Balance</div>
+        </div>
+        <div class="total-balance-val" id="total-balance-val">PKR 0</div>
+      </div>
+
+      <button class="btn-primary" onclick="startApp()">Start Tracking →</button>
+    </div>
+  </div>
+
+  <!-- ══ MAIN SCREEN ══ -->
+  <div id="main-screen" style="display: none;">
+
+    <!-- WhatsApp Quick Entry -->
+    <div class="wa-bar">
+      <div class="wa-icon">💬</div>
+      <span class="wa-label">Quick Log</span>
+      <div class="wa-input-wrap">
+        <input class="wa-input" id="wa-input" type="text" placeholder="Type naturally: &quot;paid rent 40000&quot; or &quot;received payment 85000 from Khan&quot; and press Enter">
+      </div>
+      <button class="wa-btn" onclick="parseWhatsApp()">Log ↵</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card balance">
+        <div class="stat-label">Live Balance</div>
+        <div class="stat-value teal" id="stat-balance">PKR 241,833</div>
+        <div class="stat-sub" id="stat-txcount">6 transactions</div>
+      </div>
+      <div class="stat-card income">
+        <div class="stat-label">Income This Month</div>
+        <div class="stat-value green" id="stat-income">PKR 205,000</div>
+        <div class="stat-sub" id="stat-income-count">2 entries</div>
+      </div>
+      <div class="stat-card expense">
+        <div class="stat-label">Expenses This Month</div>
+        <div class="stat-value red" id="stat-expense">PKR 108,500</div>
+        <div class="stat-sub" id="stat-expense-count">3 entries</div>
+      </div>
+    </div>
+
+    <!-- Forecast Banner -->
+    <div class="forecast-banner safe" id="forecast-banner">
+      <div class="forecast-icon" id="forecast-icon">✅</div>
+      <div class="forecast-text">
+        <div class="forecast-title" id="forecast-title">Cash Flow Looks Healthy</div>
+        <div class="forecast-detail" id="forecast-detail">Based on current patterns, you're on track for the next 12 days.</div>
+      </div>
+      <div class="forecast-val" id="forecast-val">PKR 306,166</div>
+    </div>
+
+    <!-- Two Column -->
+    <div class="two-col">
+
+      <!-- LEFT: Log Form -->
+      <div class="panel">
+        <div class="panel-title">
+          <span class="dot"></span>Log Transaction
+        </div>
+
+        <div class="type-toggle">
+          <button class="type-btn active income" id="btn-income" onclick="setType(&#39;income&#39;)">＋ Income</button>
+          <button class="type-btn expense" id="btn-expense" onclick="setType(&#39;expense&#39;)">－ Expense</button>
+        </div>
+
+        <div class="field">
+          <label>Description</label>
+          <input type="text" id="f-desc" placeholder="e.g. Payment from Ali, Rent, Salary..." oninput="onDescType()" maxlength="100">
+        </div>
+
+        <!-- AI auto-detect hint -->
+        <div class="ai-hint" id="ai-hint">
+          🤖 <span id="ai-hint-text"></span>
+        </div>
+
+        <div class="field">
+          <label>Amount (PKR)</label>
+          <div class="amount-wrap">
+            <span class="pfx">PKR</span>
+            <input type="number" id="f-amount" placeholder="0" min="0" step="1">
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select id="f-cat">
+            <option value="sales">💰 Sales / Revenue</option>
+            <option value="payment">🤝 Client Payment</option>
+            <option value="salary">👥 Salary / Wages</option>
+            <option value="rent">🏢 Rent</option>
+            <option value="supplier">📦 Supplier / Stock</option>
+            <option value="utilities">⚡ Utilities / Bills</option>
+            <option value="tax">🏛️ Tax / FBR</option>
+            <option value="transport">🚗 Transport</option>
+            <option value="other">📋 Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Date</label>
+          <input type="date" id="f-date">
+        </div>
+
+        <button class="btn-add" onclick="addTransaction()">Add Transaction ✓</button>
+      </div>
+
+      <!-- RIGHT: Transaction List -->
+      <div class="panel">
+        <div class="panel-title">
+          <span class="dot"></span>Transaction History
+        </div>
+
+        <div class="tx-list" id="tx-list">
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#14B8A622">
+          ⚡
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Electricity &amp; internet bills</div>
+          <div class="tx-meta">utilities · 7 Apr 2026</div>
+        </div>
+        <div class="tx-amount expense">
+          −PKR 8,500
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.1228)" title="Delete">×</button>
+      </div>
+    
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#EC489922">
+          📦
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Supplier — Al-Noor Traders</div>
+          <div class="tx-meta">supplier · 9 Apr 2026</div>
+        </div>
+        <div class="tx-amount expense">
+          −PKR 35,000
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.8381)" title="Delete">×</button>
+      </div>
+    
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#6366F122">
+          👥
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Staff salaries</div>
+          <div class="tx-meta">salary · 4 Apr 2026</div>
+        </div>
+        <div class="tx-amount expense">
+          −PKR 65,000
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.1904)" title="Delete">×</button>
+      </div>
+    
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#F59E0B22">
+          🏢
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Office rent — this month</div>
+          <div class="tx-meta">rent · 31 Mar 2026</div>
+        </div>
+        <div class="tx-amount expense">
+          −PKR 40,000
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.805)" title="Delete">×</button>
+      </div>
+    
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#02C39A22">
+          💰
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Monthly sales revenue</div>
+          <div class="tx-meta">sales · 6 Apr 2026</div>
+        </div>
+        <div class="tx-amount income">
+          +PKR 120,000
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.766)" title="Delete">×</button>
+      </div>
+    
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:#22C55E22">
+          🤝
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">Client payment — Malik Enterprises</div>
+          <div class="tx-meta">payment · 2 Apr 2026</div>
+        </div>
+        <div class="tx-amount income">
+          +PKR 85,000
+        </div>
+        <button class="tx-delete" onclick="deleteTx(1776497312738.5645)" title="Delete">×</button>
+      </div>
+    </div>
+
+        <!-- Category Breakdown -->
+        <div class="cat-breakdown" id="cat-breakdown" style="display: block;">
+          <div class="cat-section-title">Expense Breakdown</div>
+          <div id="cat-bars">
+      <div class="cat-bar-item">
+        <div class="cat-bar-header">
+          <span class="cat-bar-label">👥 salary</span>
+          <span class="cat-bar-val">PKR 65,000</span>
+        </div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill" style="width:43.8%;background:#6366F1">
+          </div>
+        </div>
+      </div>
+    
+      <div class="cat-bar-item">
+        <div class="cat-bar-header">
+          <span class="cat-bar-label">🏢 rent</span>
+          <span class="cat-bar-val">PKR 40,000</span>
+        </div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill" style="width:26.9%;background:#F59E0B">
+          </div>
+        </div>
+      </div>
+    
+      <div class="cat-bar-item">
+        <div class="cat-bar-header">
+          <span class="cat-bar-label">📦 supplier</span>
+          <span class="cat-bar-val">PKR 35,000</span>
+        </div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill" style="width:23.6%;background:#EC4899">
+          </div>
+        </div>
+      </div>
+    
+      <div class="cat-bar-item">
+        <div class="cat-bar-header">
+          <span class="cat-bar-label">⚡ utilities</span>
+          <span class="cat-bar-val">PKR 8,500</span>
+        </div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill" style="width:5.7%;background:#14B8A6">
+          </div>
+        </div>
+      </div>
+    </div>
+        </div>
+      </div>
+
+    </div><!-- /two-col -->
+  </div><!-- /main-screen -->
+</div><!-- /app -->
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- ══ AI HELP BUTTON ══ -->
+<button class="ai-help-btn" id="ai-help-btn" onclick="toggleAiChat()" title="Ask FlowIQ AI">🤖</button>
+
+<!-- ══ AI CHAT PANEL ══ -->
+<div class="ai-chat-panel" id="ai-chat-panel">
+  <div class="ai-chat-header">
+    <div class="ai-chat-avatar">🤖</div>
+    <div>
+      <div class="ai-chat-name">FlowIQ Assistant</div>
+      <div class="ai-chat-status">● Online — Ask me anything</div>
+    </div>
+    <button class="ai-chat-close" onclick="toggleAiChat()">×</button>
+  </div>
+  <div class="ai-chat-messages" id="ai-chat-messages">
+    <div class="chat-msg ai">
+      👋 Hi! I'm your FlowIQ AI assistant. Ask me anything about cash flow, how to use the app, or your finances. I'm here to help!
+    </div>
+  </div>
+  <div class="chat-typing" id="chat-typing">FlowIQ AI is typing...</div>
+  <div class="ai-chat-input-row">
+    <input class="ai-chat-input" id="ai-chat-input" type="text" placeholder="Ask anything... e.g. How do I read my forecast?" onkeydown="if(event.key===&#39;Enter&#39;) sendAiMessage()">
+    <button class="ai-chat-send" onclick="sendAiMessage()">Send ↵</button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+
+/* ── STATE ───────────────────────────────── */
+let balance = 0;
+let transactions = [];
+let txType = 'income';
+
+/* ── HELPERS (defined first so all functions can use them) ── */
+function fmt(n) {
+  return Math.abs(Math.round(n)).toLocaleString('en-PK');
+}
+
+/* ── CATEGORY DATA ───────────────────────── */
+const CAT_ICONS = {
+  sales:'💰', payment:'🤝', salary:'👥', rent:'🏢',
+  supplier:'📦', utilities:'⚡', tax:'🏛️', transport:'🚗', other:'📋'
+};
+
+const CAT_COLORS = {
+  sales:'#02C39A',    payment:'#22C55E',
+  salary:'#6366F1',   rent:'#F59E0B',
+  supplier:'#EC4899', utilities:'#14B8A6',
+  tax:'#EF4444',      transport:'#8B5CF6',
+  other:'#64748B'
+};
+
+/* ── SETUP ───────────────────────────────── */
+
+/* Calculate and display total opening balance live */
+function calcTotal() {
+  const cash = parseFloat(document.getElementById('cash-in-hand').value) || 0;
+  const bank = parseFloat(document.getElementById('bank-balance').value) || 0;
+  const total = cash + bank;
+  document.getElementById('total-balance-val').textContent = 'PKR ' + fmt(total);
+}
+
+/* Handle bank statement file upload */
+function handleFileUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // ── Validate: only PDF/image allowed ──
+  const allowed = ['application/pdf','image/png','image/jpeg','image/jpg'];
+  if (!allowed.includes(file.type)) {
+    showToast('Invalid file type. Only PDF, PNG, JPG allowed.', 'error');
+    event.target.value = '';
+    return;
+  }
+  // Max 10MB
+  if (file.size > 10 * 1024 * 1024) {
+    showToast('File too large. Maximum size is 10MB.', 'error');
+    event.target.value = '';
+    return;
+  }
+
+  // Show file name
+  const nameEl = document.getElementById('upload-name');
+  nameEl.textContent = '✓ ' + file.name;
+  nameEl.style.display = 'block';
+
+  // Style upload area as accepted
+  document.getElementById('upload-area').style.borderColor = 'var(--accent)';
+  document.getElementById('upload-area').style.background = 'rgba(2,192,154,0.04)';
+
+  // Show AI parsing simulation (demo mode — no real OCR needed for hackathon)
+  const parsedEl = document.getElementById('parsed-result');
+  const parsedText = document.getElementById('parsed-text');
+  parsedEl.classList.add('show');
+  parsedText.textContent = 'Reading file...';
+
+  setTimeout(() => {
+    // Simulate AI extraction from statement
+    parsedText.innerHTML = 'Detected closing balance: <strong style="color:var(--accent)">PKR 1,85,000</strong> · Account: HBL ****4821 · Period: Last Month';
+    // Auto-fill bank balance field
+    const bankInput = document.getElementById('bank-balance');
+    if (!bankInput.value) {
+      bankInput.value = 185000;
+      calcTotal();
+    }
+  }, 1400);
+}
+
+/* Validate inputs before starting */
+function startApp() {
+  const cash = parseFloat(document.getElementById('cash-in-hand').value) || 0;
+  const bank = parseFloat(document.getElementById('bank-balance').value) || 0;
+  const total = cash + bank;
+
+  // ── VALIDATION ──
+  // Check at least one source of balance is entered
+  if (total <= 0) {
+    showToast('⚠️ Please enter your cash in hand or bank balance to continue.', 'error');
+    return;
+  }
+
+  // Check for unrealistically large values (>999 crore = sanity check)
+  if (total > 9990000000) {
+    showToast('🚫 Amount too large. Please enter a realistic balance.', 'error');
+    return;
+  }
+
+  // Check for negative values (already prevented by min=0 but double-check)
+  if (cash < 0 || bank < 0) {
+    showToast('🚫 Negative amounts are not allowed.', 'error');
+    return;
+  }
+
+  balance = total;
+  document.getElementById('setup-screen').style.display = 'none';
+  document.getElementById('main-screen').style.display  = 'block';
+  document.getElementById('reset-btn').style.display    = 'inline-block';
+  document.getElementById('f-date').valueAsDate = new Date();
+  loadDemoData();
+  render();
+}
+
+function resetApp() {
+  if (!confirm('Reset everything and start over?')) return;
+  balance = 0;
+  transactions = [];
+  txType = 'income';
+  document.getElementById('cash-in-hand').value = '';
+  document.getElementById('bank-balance').value = '';
+  document.getElementById('total-balance-val').textContent = 'PKR 0';
+  document.getElementById('parsed-result').classList.remove('show');
+  document.getElementById('upload-name').style.display = 'none';
+  document.getElementById('upload-area').style.borderColor = '';
+  document.getElementById('upload-area').style.background = '';
+  document.getElementById('stmt-file').value = '';
+  document.getElementById('main-screen').style.display  = 'none';
+  document.getElementById('setup-screen').style.display = 'flex';
+  document.getElementById('reset-btn').style.display    = 'none';
+}
+
+/* ── DEMO DATA ───────────────────────────── */
+function loadDemoData() {
+  const now = new Date();
+  const m = now.getMonth(), y = now.getFullYear();
+  const d = n => new Date(y, m, n).toISOString().split('T')[0];
+
+  const demos = [
+    { type:'income',  desc:'Client payment — Malik Enterprises',  amount:85000, cat:'payment',   date:d(3) },
+    { type:'income',  desc:'Monthly sales revenue',               amount:120000,cat:'sales',     date:d(7) },
+    { type:'expense', desc:'Office rent — this month',            amount:40000, cat:'rent',      date:d(1) },
+    { type:'expense', desc:'Staff salaries',                      amount:65000, cat:'salary',    date:d(5) },
+    { type:'expense', desc:'Supplier — Al-Noor Traders',          amount:35000, cat:'supplier',  date:d(10)},
+    { type:'expense', desc:'Electricity & internet bills',        amount:8500,  cat:'utilities', date:d(8) },
+  ];
+
+  demos.forEach(tx => {
+    if (tx.type === 'income')   balance += tx.amount;
+    else                        balance -= tx.amount;
+    transactions.unshift({ ...tx, id: Date.now() + Math.random() });
+  });
+}
+
+/* ── TYPE TOGGLE ─────────────────────────── */
+function setType(t) {
+  txType = t;
+  const iBtn = document.getElementById('btn-income');
+  const eBtn = document.getElementById('btn-expense');
+  iBtn.className = 'type-btn' + (t === 'income'  ? ' active income'  : '');
+  eBtn.className = 'type-btn' + (t === 'expense' ? ' active expense' : '');
+}
+
+/* ── AI DESCRIPTION HINT ─────────────────── */
+let aiTimer = null;
+function onDescType() {
+  clearTimeout(aiTimer);
+  aiTimer = setTimeout(() => {
+    const desc = document.getElementById('f-desc').value.toLowerCase().trim();
+    if (desc.length < 3) { hideAiHint(); return; }
+
+    // Rules: keyword → { type, cat, label }
+    const rules = [
+      { kw:['rent','kiraya','dukan'],           type:'expense', cat:'rent',      label:'Rent detected → switching to Expense · Category: Rent' },
+      { kw:['salary','salaries','wages','mazdoor'], type:'expense', cat:'salary', label:'Salary detected → Expense · Category: Salary' },
+      { kw:['supplier','stock','atta','restock','inventory'], type:'expense', cat:'supplier', label:'Supplier/Stock → Expense · Category: Supplier' },
+      { kw:['wapda','electricity','bill','utility','gas','sui'], type:'expense', cat:'utilities', label:'Utility bill detected → Expense · Category: Utilities' },
+      { kw:['fbr','tax','income tax'],          type:'expense', cat:'tax',       label:'Tax payment → Expense · Category: Tax/FBR' },
+      { kw:['transport','fuel','gaari','delivery','courier'], type:'expense', cat:'transport', label:'Transport cost → Expense · Category: Transport' },
+      { kw:['received','payment from','got','collected','sale','bikri'], type:'income', cat:'payment', label:'Income detected → switching to Income · Category: Client Payment' },
+      { kw:['sales','revenue','daily sales'],   type:'income',  cat:'sales',     label:'Sales revenue → Income · Category: Sales' },
+    ];
+
+    for (const rule of rules) {
+      if (rule.kw.some(k => desc.includes(k))) {
+        showAiHint(rule.label);
+        setType(rule.type);
+        document.getElementById('f-cat').value = rule.cat;
+        return;
+      }
+    }
+    hideAiHint();
+  }, 350);
+}
+
+function showAiHint(msg) {
+  const h = document.getElementById('ai-hint');
+  document.getElementById('ai-hint-text').textContent = msg;
+  h.classList.add('show');
+}
+function hideAiHint() {
+  document.getElementById('ai-hint').classList.remove('show');
+}
+
+/* ── ADD TRANSACTION ─────────────────────── */
+function addTransaction() {
+  const desc   = document.getElementById('f-desc').value.trim();
+  const amount = parseFloat(document.getElementById('f-amount').value);
+  const cat    = document.getElementById('f-cat').value;
+  const date   = document.getElementById('f-date').value;
+
+  if (!desc)                 { showToast('Please enter a description', 'error'); return; }
+  if (!amount || amount <= 0){ showToast('Please enter a valid amount', 'error'); return; }
+  if (!date)                 { showToast('Please pick a date', 'error'); return; }
+
+  const tx = { id:Date.now(), type:txType, desc, amount, cat, date };
+  transactions.unshift(tx);
+  if (txType === 'income') balance += amount;
+  else                     balance -= amount;
+
+  // Reset form
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-amount').value = '';
+  document.getElementById('f-date').valueAsDate = new Date();
+  hideAiHint();
+
+  showToast(txType === 'income' ? `+PKR ${fmt(amount)} added ✓` : `-PKR ${fmt(amount)} logged ✓`, 'success');
+  render();
+}
+
+/* ── WHATSAPP QUICK LOG ──────────────────── */
+document.getElementById('wa-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') parseWhatsApp();
+});
+
+function parseWhatsApp() {
+  const raw = document.getElementById('wa-input').value.trim().toLowerCase();
+  if (!raw) return;
+
+  let type = 'expense', amount = 0, desc = 'Expense', cat = 'other';
+
+  const incomeWords  = ['received','income','payment from','sale','got','collected','earned','bikri'];
+  const expenseWords = ['paid','expense','spent','bought','bill','salary','rent','supplier','diya'];
+
+  if (incomeWords.some(w  => raw.includes(w))) type = 'income';
+  if (expenseWords.some(w => raw.includes(w))) type = 'expense';
+
+  // Extract number
+  const numMatch = raw.match(/[\d,]+/);
+  if (numMatch) amount = parseFloat(numMatch[0].replace(/,/g, ''));
+
+  // Map to category
+  if (raw.includes('rent')   || raw.includes('kiraya'))  { cat='rent';      desc='Rent payment'; }
+  else if (raw.includes('salary') || raw.includes('salaries')) { cat='salary';   desc='Salary payment'; }
+  else if (raw.includes('supplier') || raw.includes('stock'))  { cat='supplier'; desc='Supplier payment'; }
+  else if (raw.includes('bill') || raw.includes('electric') || raw.includes('wapda')) { cat='utilities'; desc='Utility bill'; }
+  else if (raw.includes('tax') || raw.includes('fbr'))   { cat='tax';       desc='Tax payment'; }
+  else if (raw.includes('transport') || raw.includes('fuel'))  { cat='transport';desc='Transport cost'; }
+  else if (type === 'income') { cat='payment'; desc='Client payment'; }
+  else { desc='General expense'; }
+
+  // Try to grab name from "from X" or "to X"
+  const fromMatch = raw.match(/(?:from|to)\s+([a-z][a-z\s]{1,20}?)(?:\s+\d|$)/);
+  if (fromMatch) {
+    const name = fromMatch[1].trim();
+    desc = (type === 'income' ? 'Payment from ' : 'Payment to ') +
+           name.charAt(0).toUpperCase() + name.slice(1);
+  }
+
+  if (!amount) {
+    showToast('Could not read amount. Try: "paid rent 40000"', 'error');
+    return;
+  }
+
+  const tx = { id:Date.now(), type, desc, amount, cat,
+               date: new Date().toISOString().split('T')[0] };
+  transactions.unshift(tx);
+  if (type === 'income') balance += amount;
+  else                   balance -= amount;
+
+  document.getElementById('wa-input').value = '';
+  showToast(`Logged: ${type==='income'?'+':'-'}PKR ${fmt(amount)} ✓`, 'success');
+  render();
+}
+
+/* ── DELETE ──────────────────────────────── */
+function deleteTx(id) {
+  const tx = transactions.find(t => t.id === id);
+  if (!tx) return;
+  if (tx.type === 'income') balance -= tx.amount;
+  else                      balance += tx.amount;
+  transactions = transactions.filter(t => t.id !== id);
+  showToast('Transaction deleted', 'error');
+  render();
+}
+
+/* ── RENDER ──────────────────────────────── */
+function render() {
+  const now = new Date();
+
+  // This month's transactions
+  const thisMonth = transactions.filter(t => {
+    const d = new Date(t.date);
+    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  });
+
+  const totalIncome  = thisMonth.filter(t => t.type === 'income').reduce((s,t) => s+t.amount, 0);
+  const totalExpense = thisMonth.filter(t => t.type === 'expense').reduce((s,t) => s+t.amount, 0);
+
+  // ── Stats
+  document.getElementById('stat-balance').textContent      = 'PKR ' + fmt(balance);
+  document.getElementById('stat-txcount').textContent      = transactions.length + ' transaction' + (transactions.length !== 1 ? 's' : '');
+  document.getElementById('stat-income').textContent       = 'PKR ' + fmt(totalIncome);
+  document.getElementById('stat-income-count').textContent = thisMonth.filter(t=>t.type==='income').length + ' entries';
+  document.getElementById('stat-expense').textContent      = 'PKR ' + fmt(totalExpense);
+  document.getElementById('stat-expense-count').textContent= thisMonth.filter(t=>t.type==='expense').length + ' entries';
+
+  // Balance colour
+  document.getElementById('stat-balance').className =
+    'stat-value ' + (balance >= 0 ? 'teal' : 'red');
+
+  // ── Forecast Banner
+  const dayOfMonth = now.getDate();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  const dailyIncome  = dayOfMonth > 0 ? totalIncome  / dayOfMonth : 0;
+  const dailyExpense = dayOfMonth > 0 ? totalExpense / dayOfMonth : 0;
+  const daysLeft = daysInMonth - dayOfMonth;
+  const forecast30 = balance + ((dailyIncome - dailyExpense) * daysLeft);
+
+  const banner  = document.getElementById('forecast-banner');
+  const fIcon   = document.getElementById('forecast-icon');
+  const fTitle  = document.getElementById('forecast-title');
+  const fDetail = document.getElementById('forecast-detail');
+  const fVal    = document.getElementById('forecast-val');
+
+  if (transactions.length === 0) {
+    banner.className = 'forecast-banner safe';
+    fIcon.textContent  = '📊';
+    fTitle.textContent = 'Add transactions to get your forecast';
+    fDetail.textContent = 'Log at least a few income and expense entries to see your 30-day prediction.';
+    fVal.textContent   = '—';
+  } else if (forecast30 < 0) {
+    banner.className   = 'forecast-banner danger';
+    fIcon.textContent  = '🚨';
+    fTitle.textContent = 'Cash Shortfall Predicted!';
+    fDetail.textContent = `You may run short of cash in ${daysLeft} days. Collect receivables and cut non-essential costs now.`;
+    fVal.textContent   = '−PKR ' + fmt(Math.abs(Math.round(forecast30)));
+  } else if (forecast30 < 50000) {
+    banner.className   = 'forecast-banner warn';
+    fIcon.textContent  = '⚠️';
+    fTitle.textContent = 'Cash Running Low — Watch Closely';
+    fDetail.textContent = `Predicted balance in ${daysLeft} days is below PKR 50,000. Reduce non-essential spending.`;
+    fVal.textContent   = 'PKR ' + fmt(Math.round(forecast30));
+  } else {
+    banner.className   = 'forecast-banner safe';
+    fIcon.textContent  = '✅';
+    fTitle.textContent = 'Cash Flow Looks Healthy';
+    fDetail.textContent = `Based on current patterns, you're on track for the next ${daysLeft} days.`;
+    fVal.textContent   = 'PKR ' + fmt(Math.round(forecast30));
+  }
+
+  // ── Transaction List
+  const list = document.getElementById('tx-list');
+  if (transactions.length === 0) {
+    list.innerHTML = `<div class="empty-state">
+      <div class="empty-icon">📋</div>
+      No transactions yet.<br>Log your first one!
+    </div>`;
+  } else {
+    list.innerHTML = transactions.map(tx => `
+      <div class="tx-item">
+        <div class="tx-cat-badge" style="background:${CAT_COLORS[tx.cat] || '#64748B'}22">
+          ${CAT_ICONS[tx.cat] || '📋'}
+        </div>
+        <div class="tx-info">
+          <div class="tx-desc">${escHtml(tx.desc)}</div>
+          <div class="tx-meta">${tx.cat} · ${formatDate(tx.date)}</div>
+        </div>
+        <div class="tx-amount ${tx.type}">
+          ${tx.type === 'income' ? '+' : '−'}PKR ${fmt(tx.amount)}
+        </div>
+        <button class="tx-delete" onclick="deleteTx(${tx.id})" title="Delete">×</button>
+      </div>
+    `).join('');
+  }
+
+  // ── Category Breakdown
+  const expTx   = transactions.filter(t => t.type === 'expense');
+  const totalExp = expTx.reduce((s,t) => s+t.amount, 0);
+  const catBreak = document.getElementById('cat-breakdown');
+  const catBars  = document.getElementById('cat-bars');
+
+  if (expTx.length > 0) {
+    catBreak.style.display = 'block';
+    const cats = {};
+    expTx.forEach(t => { cats[t.cat] = (cats[t.cat] || 0) + t.amount; });
+    const sorted = Object.entries(cats).sort((a,b) => b[1]-a[1]).slice(0,5);
+    catBars.innerHTML = sorted.map(([cat, amt]) => `
+      <div class="cat-bar-item">
+        <div class="cat-bar-header">
+          <span class="cat-bar-label">${CAT_ICONS[cat]||'📋'} ${cat}</span>
+          <span class="cat-bar-val">PKR ${fmt(amt)}</span>
+        </div>
+        <div class="cat-bar-track">
+          <div class="cat-bar-fill"
+            style="width:${((amt/totalExp)*100).toFixed(1)}%;background:${CAT_COLORS[cat]||'#64748B'}">
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } else {
+    catBreak.style.display = 'none';
+  }
+}
+
+/* ── HELPERS ─────────────────────────────── */
+function formatDate(d) {
+  return new Date(d + 'T12:00:00').toLocaleDateString('en-PK', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = 'toast ' + type + ' show';
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.className = 'toast'; }, 2800);
+}
+
+
+/* ══════════════════════════════════════════
+   AI HELP CHAT
+══════════════════════════════════════════ */
+
+function toggleAiChat() {
+  const panel = document.getElementById('ai-chat-panel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    document.getElementById('ai-chat-input').focus();
+  }
+}
+
+/* ── Input safety: detect illegal / harmful / non-finance queries ── */
+function isSafeFinanceQuery(text) {
+  const t = text.toLowerCase();
+
+  // Block illegal financial content
+  const illegalPatterns = [
+    'money laundering','hawala','fraud','cheat','fake invoice','black money',
+    'tax evasion','smuggling','bribery','corruption','ponzi','scam',
+    'how to hide money','how to avoid tax illegally','forged','counterfeit',
+    'how to launder','illegal transfer','shell company fraud'
+  ];
+  for (const p of illegalPatterns) {
+    if (t.includes(p)) return { safe: false, reason: 'illegal' };
+  }
+
+  // Block off-topic harmful content
+  const offTopic = [
+    'hack','password','credit card number','ssn','social security',
+    'bomb','weapon','kill','attack','exploit','malware','phishing',
+    'how to hurt','suicide','self harm'
+  ];
+  for (const p of offTopic) {
+    if (t.includes(p)) return { safe: false, reason: 'harmful' };
+  }
+
+  // Block empty or nonsense (less than 3 chars)
+  if (text.trim().length < 3) return { safe: false, reason: 'empty' };
+
+  return { safe: true };
+}
+
+/* ── AI Knowledge Base ── */
+function getAiResponse(q) {
+  const t = q.toLowerCase();
+
+  if (/^(hi|hello|hey|salam|assalam|aoa)/.test(t))
+    return "Salaam! \ud83d\udc4b I'm your FlowIQ AI. Ask me about cash flow, how to use the app, or your finances!";
+
+  if (t.includes('forecast') || t.includes('prediction') || t.includes('banner'))
+    return "\ud83d\udcca The Forecast Banner predicts your balance in 30 days based on current patterns.\n\n\ud83d\udfe2 Green = on track\n\ud83d\udfe1 Yellow = getting tight\n\ud83d\udd34 Red = shortfall predicted — act now!";
+
+  if (t.includes('log') || t.includes('add transaction') || t.includes('how to add') || t.includes('enter'))
+    return "To log a transaction:\n1\ufe0f\u20e3 Use the Quick Log bar — type naturally like 'paid rent 40000' and press Enter.\n2\ufe0f\u20e3 Or use the Log Transaction form — choose Income/Expense, fill details, click Add.";
+
+  if (t.includes('whatsapp') || t.includes('quick log') || t.includes('quick entry') || t.includes('type naturally'))
+    return "\ud83d\udcac Quick Log understands plain language!\n\nExamples:\n\u2022 'paid rent 40000'\n\u2022 'received payment 85000 from Khan'\n\u2022 'salary staff 60000'\n\u2022 'wapda bill 5000'\n\nThe AI reads and logs it automatically!";
+
+  if (t.includes('balance') || t.includes('total balance') || t.includes('opening'))
+    return "\ud83d\udcb0 Opening Balance = Cash in Hand + Bank Balance\n\nEntered on setup screen. Every transaction you add automatically updates your Live Balance on the dashboard.";
+
+  if (t.includes('categor'))
+    return "FlowIQ has 9 categories:\n\ud83d\udcb0 Sales/Revenue\n\ud83e\udd1d Client Payment\n\ud83d\udc65 Salary/Wages\n\ud83c\udfe2 Rent\n\ud83d\udce6 Supplier/Stock\n\u26a1 Utilities/Bills\n\ud83c\udfd7\ufe0f Tax/FBR\n\ud83d\ude97 Transport\n\ud83d\udccb Other\n\nAI auto-detects the right one from your description!";
+
+  if (t.includes('delete') || t.includes('remove') || t.includes('undo'))
+    return "Click the \u00d7 button on the right of any entry in Transaction History. The balance updates automatically.";
+
+  if (t.includes('reset') || t.includes('start over') || t.includes('clear all'))
+    return "Click the \u21ba Reset button in the top navigation bar. All data clears and you go back to the setup screen.";
+
+  if (t.includes('bank statement') || t.includes('upload') || t.includes('pdf') || t.includes('statement'))
+    return "\ud83d\udcc4 Upload your last month's bank statement (PDF or image) on the setup screen. The AI reads it and auto-fills your bank balance so you don't have to type it!";
+
+  if (t.includes('run out') || t.includes('shortfall') || t.includes('survive') || t.includes('broke') || t.includes('no money'))
+    return "\ud83d\udea8 If forecast shows shortfall:\n1. Chase unpaid customer invoices\n2. Delay non-essential purchases\n3. Negotiate supplier terms\n4. Find highest expense category and cut it\n\nCheck Expense Breakdown to see where money is going.";
+
+  if (t.includes('fbr') || t.includes('tax') || t.includes('income tax') || t.includes('gst'))
+    return "\ud83c\udfd7\ufe0f Log tax payments as Expense, Category: Tax/FBR. FlowIQ tracks them separately. Check Expense Breakdown to see % going to taxes.";
+
+  if (t.includes('salary') || t.includes('staff') || t.includes('wages') || t.includes('employee'))
+    return "\ud83d\udc65 Log salary as Expense, Category: Salary/Wages. Add each employee separately or as a bulk entry. AI auto-detects Salary when you type it in Quick Log!";
+
+  if (t.includes('what is flowiq') || t.includes('about flowiq') || t.includes('flowiq kya') || t.includes('how does flowiq'))
+    return "FlowIQ is an AI cash flow tracker for Pakistani SMEs \ud83c\uddf5\ud83c\uddf0\n\nIt answers one question: Will I have enough money next month?\n\n\u2705 Log income & expenses instantly\n\u2705 30-day AI forecast\n\u2705 WhatsApp-style quick entry\n\u2705 Category breakdown\n\u2705 Cash shortfall alerts";
+
+  if (t.includes('help') || t.includes('kaise') || t.includes('how do') || t.includes('guide'))
+    return "Quick guide:\n1\ufe0f\u20e3 Enter balance on setup screen\n2\ufe0f\u20e3 Log income & expenses using Quick Log or the form\n3\ufe0f\u20e3 Watch Forecast Banner — updates in real-time\n4\ufe0f\u20e3 Check Expense Breakdown to see where money goes\n\nAsk me anything specific!";
+
+  return "I help with FlowIQ and SME cash flow questions. Try asking:\n\u2022 How do I read my forecast?\n\u2022 How do I log a payment?\n\u2022 What do the colors mean?\n\u2022 How do I delete a transaction?";
+}
+
+function sendAiMessage() {
+  const input = document.getElementById('ai-chat-input');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const messagesEl = document.getElementById('ai-chat-messages');
+  const typingEl   = document.getElementById('chat-typing');
+  const safety = isSafeFinanceQuery(msg);
+
+  const userBubble = document.createElement('div');
+  userBubble.className = 'chat-msg user';
+  userBubble.textContent = msg;
+  messagesEl.appendChild(userBubble);
+  input.value = '';
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  if (!safety.safe) {
+    const errBubble = document.createElement('div');
+    errBubble.className = 'chat-msg error-msg';
+    if (safety.reason === 'illegal')
+      errBubble.textContent = '\ud83d\udeab I cannot help with illegal financial activities. FlowIQ is for legitimate business tracking only.';
+    else if (safety.reason === 'harmful')
+      errBubble.textContent = '\ud83d\udeab That topic is outside my scope. I only assist with cash flow and finance questions.';
+    else
+      errBubble.textContent = '\u26a0\ufe0f Please type a question so I can help you.';
+    messagesEl.appendChild(errBubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return;
+  }
+
+  typingEl.classList.add('show');
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  setTimeout(() => {
+    typingEl.classList.remove('show');
+    const response = getAiResponse(msg);
+    const aiBubble = document.createElement('div');
+    aiBubble.className = 'chat-msg ai';
+    aiBubble.innerHTML = response
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\n/g,'<br>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    messagesEl.appendChild(aiBubble);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }, 800);
+}
+
+</script>
+
+</body></html>
