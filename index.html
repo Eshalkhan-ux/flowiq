@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0085)file:///Users/apple/Desktop/FlowIQ%20%E2%80%94%20AI%20Cash%20Flow%20Intelligence2.htm -->
+<!-- saved from url=(0053)file:///Users/apple/Downloads/FlowIQ_Final%20(1).html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FlowIQ — AI Cash Flow Intelligence</title>
 
-<link href="./FlowIQ — AI Cash Flow Intelligence3_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ══════════════════════════════════════════
@@ -907,6 +907,54 @@ nav {
   .stats { grid-template-columns: 1fr; }
   .stats .stat-card:last-child { grid-column: auto; }
 }
+
+/* ═══ SETUP SCREEN ANIMATIONS ═══ */
+#setup-screen{position:relative;overflow:hidden;}
+.s-orb{position:absolute;border-radius:50%;filter:blur(72px);pointer-events:none;z-index:0;animation:orbF 8s ease-in-out infinite;}
+.s-orb.o1{width:320px;height:320px;background:radial-gradient(circle,rgba(2,192,154,0.14) 0%,transparent 70%);top:-90px;left:-110px;animation-delay:0s}
+.s-orb.o2{width:240px;height:240px;background:radial-gradient(circle,rgba(2,131,144,0.11) 0%,transparent 70%);bottom:-70px;right:-90px;animation-delay:-4s}
+.s-orb.o3{width:160px;height:160px;background:radial-gradient(circle,rgba(0,229,176,0.08) 0%,transparent 70%);top:45%;left:65%;animation-delay:-2s}
+@keyframes orbF{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-26px) scale(1.06)}}
+.setup-card{position:relative;z-index:1;animation:cardUp .7s cubic-bezier(.22,1,.36,1) both,cardGlow 4s ease-in-out 1s infinite}
+@keyframes cardUp{from{opacity:0;transform:translateY(32px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes cardGlow{0%,100%{box-shadow:0 24px 64px rgba(0,0,0,.45)}50%{box-shadow:0 24px 64px rgba(0,0,0,.45),0 0 28px rgba(2,192,154,.15)}}
+.setup-card>*{animation:fadeUp .5s ease both}
+.setup-card>*:nth-child(1){animation-delay:.10s}.setup-card>*:nth-child(2){animation-delay:.18s}
+.setup-card>*:nth-child(3){animation-delay:.24s}.setup-card>*:nth-child(4){animation-delay:.30s}
+.setup-card>*:nth-child(5){animation-delay:.36s}.setup-card>*:nth-child(6){animation-delay:.40s}
+.setup-card>*:nth-child(7){animation-delay:.44s}.setup-card>*:nth-child(8){animation-delay:.48s}
+.setup-card>*:nth-child(9){animation-delay:.52s}.setup-card>*:nth-child(10){animation-delay:.56s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.setup-icon{display:inline-block;animation:bounce 2.6s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(0deg)}30%{transform:translateY(-10px) rotate(-5deg)}60%{transform:translateY(-4px) rotate(4deg)}}
+.total-balance-box{animation:balPulse 3s ease-in-out infinite}
+@keyframes balPulse{0%,100%{background:rgba(2,192,154,.08)}50%{background:rgba(2,192,154,.14)}}
+.btn-primary{position:relative;overflow:hidden}
+.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);animation:shimmer 2.4s ease-in-out infinite}
+@keyframes shimmer{0%{left:-100%}60%,100%{left:150%}}
+.upload-area{transition:all .25s ease}
+.upload-area:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(2,192,154,.12)}
+.s-pt{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--accent);pointer-events:none;z-index:0;animation:ptUp linear infinite;opacity:0}
+@keyframes ptUp{0%{opacity:0;transform:translateY(0) scale(0)}10%{opacity:.55;transform:translateY(-18px) scale(1)}90%{opacity:.2}100%{opacity:0;transform:translateY(-110px) scale(.4)}}
+
+/* ═══ EXPENSE OVERFLOW NOTIFICATION ═══ */
+#expense-overflow-alert{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:99999;display:none;align-items:center;justify-content:center;}
+.ov-box{background:var(--card);border:1px solid rgba(239,68,68,.45);border-radius:22px;padding:36px 30px 28px;max-width:410px;width:90%;text-align:center;box-shadow:0 0 60px rgba(239,68,68,.18),0 24px 60px rgba(0,0,0,.5);animation:boxPop .4s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden}
+.ov-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#EF4444,#F59E0B,#EF4444);background-size:200% 100%;animation:stripe 2s linear infinite}
+@keyframes stripe{0%{background-position:0%}100%{background-position:200%}}
+@keyframes boxPop{from{opacity:0;transform:scale(.82) translateY(28px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.ov-emoji{font-size:54px;display:block;margin-bottom:14px;animation:shake .6s ease .3s both}
+@keyframes shake{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-7deg)}80%{transform:rotate(5deg)}}
+.ov-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#F87171;margin-bottom:11px}
+.ov-msg{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
+.ov-msg strong{color:var(--white)}
+.ov-chips{display:flex;gap:10px;margin-bottom:22px}
+.ov-chip{flex:1;background:var(--darker);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
+.ov-chip .cl{font-size:10px;font-weight:700;color:var(--dim);letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px}
+.ov-chip .cv{font-family:'Syne',sans-serif;font-size:15px;font-weight:700}
+.ov-chip .cv.red{color:#F87171}.ov-chip .cv.teal{color:var(--accent)}
+.ov-cancel{width:100%;background:none;border:1px solid var(--border2);border-radius:12px;padding:13px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.ov-cancel:hover{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.4);color:#F87171}
 </style>
 </head>
 <body>
@@ -917,12 +965,17 @@ nav {
     <div class="logo">Flow<span>IQ</span></div>
     <div class="nav-right">
       <div class="nav-badge">AI Cash Flow</div>
-      <button class="nav-reset" onclick="resetApp()" id="reset-btn" style="display: none;">↺ Reset</button>
+      <button class="nav-reset" onclick="resetApp()" id="reset-btn" style="display:none">↺ Reset</button>
     </div>
   </nav>
 
   <!-- ══ SETUP SCREEN ══ -->
-  <div id="setup-screen" style="display: flex;">
+  <div id="setup-screen">
+    <div class="s-orb o1"></div><div class="s-orb o2"></div><div class="s-orb o3"></div>
+    <div class="s-pt" style="left:12%;bottom:8%;animation-duration:5s;animation-delay:0s"></div>
+    <div class="s-pt" style="left:30%;bottom:4%;animation-duration:7s;animation-delay:1.3s"></div>
+    <div class="s-pt" style="left:70%;bottom:6%;animation-duration:6s;animation-delay:2.6s"></div>
+    <div class="s-pt" style="left:84%;bottom:14%;animation-duration:8s;animation-delay:.7s"></div>
     <div class="setup-card">
       <span class="setup-icon">💼</span>
       <div class="setup-title">Welcome to FlowIQ</div>
@@ -933,15 +986,15 @@ nav {
 
       <!-- STEP 2: Upload Bank Statement -->
       <label class="setup-label" style="margin-top:2px">Step 2 · Upload Bank Statement <span style="color:var(--dim);font-weight:400;text-transform:none;letter-spacing:0">(Last Month · PDF or Image)</span></label>
-      <div class="upload-area" id="upload-area" style="">
+      <div class="upload-area" id="upload-area">
         <input type="file" id="stmt-file" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFileUpload(event)">
         <div class="upload-icon">📄</div>
         <div class="upload-text">Drag &amp; drop or <span>click to browse</span></div>
         <div class="upload-hint">Accepts PDF, PNG, JPG — last month's statement</div>
-        <div class="upload-name" id="upload-name" style="display: none;">✓ HBL_Statement_March2025.pdf</div>
+        <div class="upload-name" id="upload-name"></div>
       </div>
       <div class="parsed-result" id="parsed-result">
-        🤖 <strong>AI Reading Statement:</strong> <span id="parsed-text">Detected closing balance: <strong style="color:var(--accent)">PKR 1,85,000</strong> · Account: HBL ****4821 · Period: Last Month</span>
+        🤖 <strong>AI Reading Statement:</strong> <span id="parsed-text">Analysing...</span>
       </div>
 
       <!-- STEP 3: Cash in Hand -->
@@ -973,7 +1026,7 @@ nav {
   </div>
 
   <!-- ══ MAIN SCREEN ══ -->
-  <div id="main-screen" style="display: none;">
+  <div id="main-screen">
 
     <!-- WhatsApp Quick Entry -->
     <div class="wa-bar">
@@ -989,18 +1042,18 @@ nav {
     <div class="stats">
       <div class="stat-card balance">
         <div class="stat-label">Live Balance</div>
-        <div class="stat-value teal" id="stat-balance">PKR 241,833</div>
-        <div class="stat-sub" id="stat-txcount">6 transactions</div>
+        <div class="stat-value teal" id="stat-balance">PKR 0</div>
+        <div class="stat-sub" id="stat-txcount">0 transactions</div>
       </div>
       <div class="stat-card income">
         <div class="stat-label">Income This Month</div>
-        <div class="stat-value green" id="stat-income">PKR 205,000</div>
-        <div class="stat-sub" id="stat-income-count">2 entries</div>
+        <div class="stat-value green" id="stat-income">PKR 0</div>
+        <div class="stat-sub" id="stat-income-count">0 entries</div>
       </div>
       <div class="stat-card expense">
         <div class="stat-label">Expenses This Month</div>
-        <div class="stat-value red" id="stat-expense">PKR 108,500</div>
-        <div class="stat-sub" id="stat-expense-count">3 entries</div>
+        <div class="stat-value red" id="stat-expense">PKR 0</div>
+        <div class="stat-sub" id="stat-expense-count">0 entries</div>
       </div>
     </div>
 
@@ -1009,9 +1062,9 @@ nav {
       <div class="forecast-icon" id="forecast-icon">✅</div>
       <div class="forecast-text">
         <div class="forecast-title" id="forecast-title">Cash Flow Looks Healthy</div>
-        <div class="forecast-detail" id="forecast-detail">Based on current patterns, you're on track for the next 12 days.</div>
+        <div class="forecast-detail" id="forecast-detail">Based on your patterns, you're on track for next 30 days.</div>
       </div>
-      <div class="forecast-val" id="forecast-val">PKR 306,166</div>
+      <div class="forecast-val" id="forecast-val">—</div>
     </div>
 
     <!-- Two Column -->
@@ -1076,139 +1129,16 @@ nav {
         </div>
 
         <div class="tx-list" id="tx-list">
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#14B8A622">
-          ⚡
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            No transactions yet.<br>Log your first one!
+          </div>
         </div>
-        <div class="tx-info">
-          <div class="tx-desc">Electricity &amp; internet bills</div>
-          <div class="tx-meta">utilities · 7 Apr 2026</div>
-        </div>
-        <div class="tx-amount expense">
-          −PKR 8,500
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.1228)" title="Delete">×</button>
-      </div>
-    
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#EC489922">
-          📦
-        </div>
-        <div class="tx-info">
-          <div class="tx-desc">Supplier — Al-Noor Traders</div>
-          <div class="tx-meta">supplier · 9 Apr 2026</div>
-        </div>
-        <div class="tx-amount expense">
-          −PKR 35,000
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.8381)" title="Delete">×</button>
-      </div>
-    
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#6366F122">
-          👥
-        </div>
-        <div class="tx-info">
-          <div class="tx-desc">Staff salaries</div>
-          <div class="tx-meta">salary · 4 Apr 2026</div>
-        </div>
-        <div class="tx-amount expense">
-          −PKR 65,000
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.1904)" title="Delete">×</button>
-      </div>
-    
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#F59E0B22">
-          🏢
-        </div>
-        <div class="tx-info">
-          <div class="tx-desc">Office rent — this month</div>
-          <div class="tx-meta">rent · 31 Mar 2026</div>
-        </div>
-        <div class="tx-amount expense">
-          −PKR 40,000
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.805)" title="Delete">×</button>
-      </div>
-    
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#02C39A22">
-          💰
-        </div>
-        <div class="tx-info">
-          <div class="tx-desc">Monthly sales revenue</div>
-          <div class="tx-meta">sales · 6 Apr 2026</div>
-        </div>
-        <div class="tx-amount income">
-          +PKR 120,000
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.766)" title="Delete">×</button>
-      </div>
-    
-      <div class="tx-item">
-        <div class="tx-cat-badge" style="background:#22C55E22">
-          🤝
-        </div>
-        <div class="tx-info">
-          <div class="tx-desc">Client payment — Malik Enterprises</div>
-          <div class="tx-meta">payment · 2 Apr 2026</div>
-        </div>
-        <div class="tx-amount income">
-          +PKR 85,000
-        </div>
-        <button class="tx-delete" onclick="deleteTx(1776497312738.5645)" title="Delete">×</button>
-      </div>
-    </div>
 
         <!-- Category Breakdown -->
-        <div class="cat-breakdown" id="cat-breakdown" style="display: block;">
+        <div class="cat-breakdown" id="cat-breakdown">
           <div class="cat-section-title">Expense Breakdown</div>
-          <div id="cat-bars">
-      <div class="cat-bar-item">
-        <div class="cat-bar-header">
-          <span class="cat-bar-label">👥 salary</span>
-          <span class="cat-bar-val">PKR 65,000</span>
-        </div>
-        <div class="cat-bar-track">
-          <div class="cat-bar-fill" style="width:43.8%;background:#6366F1">
-          </div>
-        </div>
-      </div>
-    
-      <div class="cat-bar-item">
-        <div class="cat-bar-header">
-          <span class="cat-bar-label">🏢 rent</span>
-          <span class="cat-bar-val">PKR 40,000</span>
-        </div>
-        <div class="cat-bar-track">
-          <div class="cat-bar-fill" style="width:26.9%;background:#F59E0B">
-          </div>
-        </div>
-      </div>
-    
-      <div class="cat-bar-item">
-        <div class="cat-bar-header">
-          <span class="cat-bar-label">📦 supplier</span>
-          <span class="cat-bar-val">PKR 35,000</span>
-        </div>
-        <div class="cat-bar-track">
-          <div class="cat-bar-fill" style="width:23.6%;background:#EC4899">
-          </div>
-        </div>
-      </div>
-    
-      <div class="cat-bar-item">
-        <div class="cat-bar-header">
-          <span class="cat-bar-label">⚡ utilities</span>
-          <span class="cat-bar-val">PKR 8,500</span>
-        </div>
-        <div class="cat-bar-track">
-          <div class="cat-bar-fill" style="width:5.7%;background:#14B8A6">
-          </div>
-        </div>
-      </div>
-    </div>
+          <div id="cat-bars"></div>
         </div>
       </div>
 
@@ -1250,15 +1180,28 @@ nav {
 ══════════════════════════════════════════ -->
 <script>
 
+/* ── HELPERS (defined first so calcTotal works on page load) ── */
+function fmt(n) { return Math.abs(Math.round(n)).toLocaleString('en-PK'); }
+function formatDate(d) {
+  return new Date(d + 'T12:00:00').toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+function escHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function showToast(msg, type) {
+  type = type || 'success';
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast ' + type + ' show';
+  clearTimeout(t._timer); t._timer = setTimeout(function(){ t.className = 'toast'; }, 2800);
+}
+
+
 /* ── STATE ───────────────────────────────── */
 let balance = 0;
+let openingBalance = 0;
+let expenseAlertShown = false;
 let transactions = [];
 let txType = 'income';
-
-/* ── HELPERS (defined first so all functions can use them) ── */
-function fmt(n) {
-  return Math.abs(Math.round(n)).toLocaleString('en-PK');
-}
 
 /* ── CATEGORY DATA ───────────────────────── */
 const CAT_ICONS = {
@@ -1356,10 +1299,14 @@ function startApp() {
   }
 
   balance = total;
+  openingBalance = total;
+  expenseAlertShown = false;
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('main-screen').style.display  = 'block';
   document.getElementById('reset-btn').style.display    = 'inline-block';
   document.getElementById('f-date').valueAsDate = new Date();
+  var _wa = document.getElementById('wa-input');
+  if (_wa && !_wa._b) { _wa.addEventListener('keydown', function(e){ if(e.key==='Enter') parseWhatsApp(); }); _wa._b=true; }
   loadDemoData();
   render();
 }
@@ -1367,6 +1314,8 @@ function startApp() {
 function resetApp() {
   if (!confirm('Reset everything and start over?')) return;
   balance = 0;
+  openingBalance = 0;
+  expenseAlertShown = false;
   transactions = [];
   txType = 'income';
   document.getElementById('cash-in-hand').value = '';
@@ -1481,9 +1430,7 @@ function addTransaction() {
 }
 
 /* ── WHATSAPP QUICK LOG ──────────────────── */
-document.getElementById('wa-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') parseWhatsApp();
-});
+/* wa-input listener added when main screen opens */
 
 function parseWhatsApp() {
   const raw = document.getElementById('wa-input').value.trim().toLowerCase();
@@ -1663,26 +1610,37 @@ function render() {
   } else {
     catBreak.style.display = 'none';
   }
+  // expense alert check
+  if (!expenseAlertShown && openingBalance > 0) {
+    var _thisMonth = transactions.filter(function(t){ var d=new Date(t.date); return d.getMonth()===new Date().getMonth() && d.getFullYear()===new Date().getFullYear(); });
+    var _totalExp = _thisMonth.filter(function(t){ return t.type==='expense'; }).reduce(function(s,t){ return s+t.amount; }, 0);
+    if (_totalExp > openingBalance) {
+      expenseAlertShown = true;
+      document.getElementById('ov-exp').textContent = 'PKR ' + fmt(_totalExp);
+      document.getElementById('ov-bal').textContent = 'PKR ' + fmt(openingBalance);
+      document.getElementById('ov-chip-bal').textContent = 'PKR ' + fmt(openingBalance);
+      document.getElementById('ov-chip-exp').textContent = 'PKR ' + fmt(_totalExp);
+      try {
+        var _c = new (window.AudioContext || window.webkitAudioContext)();
+        [0, 0.22, 0.44].forEach(function(t, i) {
+          var o = _c.createOscillator(), g = _c.createGain();
+          o.connect(g); g.connect(_c.destination);
+          o.type = 'sine'; o.frequency.value = [700, 550, 430][i];
+          g.gain.setValueAtTime(0, _c.currentTime + t);
+          g.gain.linearRampToValueAtTime(0.3, _c.currentTime + t + 0.04);
+          g.gain.linearRampToValueAtTime(0, _c.currentTime + t + 0.22);
+          o.start(_c.currentTime + t); o.stop(_c.currentTime + t + 0.25);
+        });
+      } catch(e) {}
+      document.getElementById('expense-overflow-alert').style.display = 'flex';
+    }
+  }
+}
+function dismissOverflow() {
+  document.getElementById('expense-overflow-alert').style.display = 'none';
 }
 
-/* ── HELPERS ─────────────────────────────── */
-function formatDate(d) {
-  return new Date(d + 'T12:00:00').toLocaleDateString('en-PK', {
-    day: 'numeric', month: 'short', year: 'numeric'
-  });
-}
-
-function escHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-function showToast(msg, type = 'success') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className   = 'toast ' + type + ' show';
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => { t.className = 'toast'; }, 2800);
-}
+/* helpers at top */
 
 
 /* ══════════════════════════════════════════
@@ -1728,53 +1686,68 @@ function isSafeFinanceQuery(text) {
   return { safe: true };
 }
 
-/* ── AI Knowledge Base ── */
+/* ── AI Knowledge Base (rule-based, defensible for hackathon) ── */
 function getAiResponse(q) {
   const t = q.toLowerCase();
 
-  if (/^(hi|hello|hey|salam|assalam|aoa)/.test(t))
-    return "Salaam! \ud83d\udc4b I'm your FlowIQ AI. Ask me about cash flow, how to use the app, or your finances!";
+  // Greetings
+  if (/^(hi|hello|hey|salam|assalam|aoa)/.test(t))
+    return "Salaam! 👋 I'm your FlowIQ AI. Ask me about your cash flow, how to read the forecast, or how to log transactions. I'm here to help!";
 
+  // Forecast
   if (t.includes('forecast') || t.includes('prediction') || t.includes('banner'))
-    return "\ud83d\udcca The Forecast Banner predicts your balance in 30 days based on current patterns.\n\n\ud83d\udfe2 Green = on track\n\ud83d\udfe1 Yellow = getting tight\n\ud83d\udd34 Red = shortfall predicted — act now!";
+    return "📊 The **Forecast Banner** at the top predicts your balance in 30 days based on your current income and expense pace.\n\n🟢 Green = you're on track\n🟡 Yellow = getting tight\n🔴 Red = cash shortfall predicted — take action now!";
 
+  // How to log
   if (t.includes('log') || t.includes('add transaction') || t.includes('how to add') || t.includes('enter'))
-    return "To log a transaction:\n1\ufe0f\u20e3 Use the Quick Log bar — type naturally like 'paid rent 40000' and press Enter.\n2\ufe0f\u20e3 Or use the Log Transaction form — choose Income/Expense, fill details, click Add.";
+    return "To log a transaction:\n1️⃣ Use the **Quick Log bar** at the top — just type naturally like 'paid rent 40000' and press Enter.\n2️⃣ Or use the **Log Transaction form** — choose Income/Expense, fill in details, click Add ✓";
 
+  // WhatsApp entry
   if (t.includes('whatsapp') || t.includes('quick log') || t.includes('quick entry') || t.includes('type naturally'))
-    return "\ud83d\udcac Quick Log understands plain language!\n\nExamples:\n\u2022 'paid rent 40000'\n\u2022 'received payment 85000 from Khan'\n\u2022 'salary staff 60000'\n\u2022 'wapda bill 5000'\n\nThe AI reads and logs it automatically!";
+    return "💬 The Quick Log bar understands plain language!\n\nExamples you can type:\n• 'paid rent 40000'\n• 'received payment 85000 from Khan'\n• 'salary staff 60000'\n• 'wapda bill 5000'\n\nThe AI reads it and logs it automatically!";
 
+  // Balance
   if (t.includes('balance') || t.includes('total balance') || t.includes('opening'))
-    return "\ud83d\udcb0 Opening Balance = Cash in Hand + Bank Balance\n\nEntered on setup screen. Every transaction you add automatically updates your Live Balance on the dashboard.";
+    return "💰 Your **Opening Balance** is the total of:\n• Cash in hand (physical cash)\n+ Bank account balance\n\nThis is entered on the first screen. After that, every transaction you add automatically updates your Live Balance shown on the dashboard.";
 
-  if (t.includes('categor'))
-    return "FlowIQ has 9 categories:\n\ud83d\udcb0 Sales/Revenue\n\ud83e\udd1d Client Payment\n\ud83d\udc65 Salary/Wages\n\ud83c\udfe2 Rent\n\ud83d\udce6 Supplier/Stock\n\u26a1 Utilities/Bills\n\ud83c\udfd7\ufe0f Tax/FBR\n\ud83d\ude97 Transport\n\ud83d\udccb Other\n\nAI auto-detects the right one from your description!";
+  // Categories
+  if (t.includes('categor') || t.includes('category'))
+    return "FlowIQ has 9 categories:\n💰 Sales/Revenue\n🤝 Client Payment\n👥 Salary/Wages\n🏢 Rent\n📦 Supplier/Stock\n⚡ Utilities/Bills\n🏛️ Tax/FBR\n🚗 Transport\n📋 Other\n\nThe AI auto-detects the right one when you type a description!";
 
+  // Delete
   if (t.includes('delete') || t.includes('remove') || t.includes('undo'))
-    return "Click the \u00d7 button on the right of any entry in Transaction History. The balance updates automatically.";
+    return "To delete a transaction, click the **×** button on the right side of any entry in the Transaction History list. The balance updates automatically.";
 
+  // Reset
   if (t.includes('reset') || t.includes('start over') || t.includes('clear all'))
-    return "Click the \u21ba Reset button in the top navigation bar. All data clears and you go back to the setup screen.";
+    return "Click the **↺ Reset** button in the top navigation bar to clear all data and start fresh. You'll be taken back to the setup screen.";
 
+  // Bank statement
   if (t.includes('bank statement') || t.includes('upload') || t.includes('pdf') || t.includes('statement'))
-    return "\ud83d\udcc4 Upload your last month's bank statement (PDF or image) on the setup screen. The AI reads it and auto-fills your bank balance so you don't have to type it!";
+    return "📄 On the setup screen, you can upload your last month's bank statement (PDF or image). The AI reads it and **auto-fills your bank balance** — so you don't have to type it manually!";
 
+  // Survival / money running out
   if (t.includes('run out') || t.includes('shortfall') || t.includes('survive') || t.includes('broke') || t.includes('no money'))
-    return "\ud83d\udea8 If forecast shows shortfall:\n1. Chase unpaid customer invoices\n2. Delay non-essential purchases\n3. Negotiate supplier terms\n4. Find highest expense category and cut it\n\nCheck Expense Breakdown to see where money is going.";
+    return "🚨 If your forecast shows a cash shortfall, here's what to do:\n1. Follow up on unpaid customer invoices\n2. Delay non-essential purchases\n3. Negotiate supplier payment terms\n4. Check which expense category is highest and cut it\n\nUse the Expense Breakdown chart to find where most money is going.";
 
+  // FBR / Tax
   if (t.includes('fbr') || t.includes('tax') || t.includes('income tax') || t.includes('gst'))
-    return "\ud83c\udfd7\ufe0f Log tax payments as Expense, Category: Tax/FBR. FlowIQ tracks them separately. Check Expense Breakdown to see % going to taxes.";
+    return "🏛️ For FBR/Tax entries, select **Tax/FBR** as the category when logging. FlowIQ tracks all tax payments separately. In the expense breakdown, you can see what % of your spending goes to taxes.";
 
+  // Salary
   if (t.includes('salary') || t.includes('staff') || t.includes('wages') || t.includes('employee'))
-    return "\ud83d\udc65 Log salary as Expense, Category: Salary/Wages. Add each employee separately or as a bulk entry. AI auto-detects Salary when you type it in Quick Log!";
+    return "👥 Log salary payments as an **Expense** with category **Salary/Wages**. You can add each staff member separately or as a bulk 'Staff salaries' entry. The AI auto-detects the Salary category when you type it in the description.";
 
-  if (t.includes('what is flowiq') || t.includes('about flowiq') || t.includes('flowiq kya') || t.includes('how does flowiq'))
-    return "FlowIQ is an AI cash flow tracker for Pakistani SMEs \ud83c\uddf5\ud83c\uddf0\n\nIt answers one question: Will I have enough money next month?\n\n\u2705 Log income & expenses instantly\n\u2705 30-day AI forecast\n\u2705 WhatsApp-style quick entry\n\u2705 Category breakdown\n\u2705 Cash shortfall alerts";
+  // What is FlowIQ
+  if (t.includes('what is flowiq') || t.includes('about flowiq') || t.includes('how does flowiq') || t.includes('flowiq kya'))
+    return "FlowIQ is an AI-powered cash flow tracker built for Pakistani SMEs 🇵🇰\n\nIt answers one question: **'Will I have enough money next month?'**\n\nFeatures:\n✅ Log income & expenses in seconds\n✅ 30-day AI forecast\n✅ WhatsApp-style quick entry\n✅ Category breakdown\n✅ Cash shortfall alerts";
 
+  // Help
   if (t.includes('help') || t.includes('kaise') || t.includes('how do') || t.includes('guide'))
-    return "Quick guide:\n1\ufe0f\u20e3 Enter balance on setup screen\n2\ufe0f\u20e3 Log income & expenses using Quick Log or the form\n3\ufe0f\u20e3 Watch Forecast Banner — updates in real-time\n4\ufe0f\u20e3 Check Expense Breakdown to see where money goes\n\nAsk me anything specific!";
+    return "Here's a quick guide:\n1️⃣ Enter your balance on setup screen\n2️⃣ Log income & expenses using Quick Log or the form\n3️⃣ Watch the Forecast Banner — it updates in real-time\n4️⃣ Check Expense Breakdown to see where money goes\n\nAsk me anything specific and I'll help!";
 
-  return "I help with FlowIQ and SME cash flow questions. Try asking:\n\u2022 How do I read my forecast?\n\u2022 How do I log a payment?\n\u2022 What do the colors mean?\n\u2022 How do I delete a transaction?";
+  // Default
+  return "I'm designed to help with FlowIQ and SME cash flow questions. Try asking:\n• 'How do I read my forecast?'\n• 'How do I log a payment?'\n• 'What do the colors on the banner mean?'\n• 'How do I delete a transaction?'";
 }
 
 function sendAiMessage() {
@@ -1784,8 +1757,11 @@ function sendAiMessage() {
 
   const messagesEl = document.getElementById('ai-chat-messages');
   const typingEl   = document.getElementById('chat-typing');
+
+  // ── Safety check ──
   const safety = isSafeFinanceQuery(msg);
 
+  // Append user message
   const userBubble = document.createElement('div');
   userBubble.className = 'chat-msg user';
   userBubble.textContent = msg;
@@ -1794,36 +1770,53 @@ function sendAiMessage() {
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
   if (!safety.safe) {
+    // Show error bubble immediately
     const errBubble = document.createElement('div');
     errBubble.className = 'chat-msg error-msg';
-    if (safety.reason === 'illegal')
-      errBubble.textContent = '\ud83d\udeab I cannot help with illegal financial activities. FlowIQ is for legitimate business tracking only.';
-    else if (safety.reason === 'harmful')
-      errBubble.textContent = '\ud83d\udeab That topic is outside my scope. I only assist with cash flow and finance questions.';
-    else
-      errBubble.textContent = '\u26a0\ufe0f Please type a question so I can help you.';
+    if (safety.reason === 'illegal') {
+      errBubble.textContent = '🚫 I cannot help with illegal financial activities. FlowIQ is built for legitimate business tracking only.';
+    } else if (safety.reason === 'harmful') {
+      errBubble.textContent = '🚫 That topic is outside my scope. I can only assist with cash flow and financial management questions.';
+    } else {
+      errBubble.textContent = '⚠️ Please type a question so I can help you.';
+    }
     messagesEl.appendChild(errBubble);
     messagesEl.scrollTop = messagesEl.scrollHeight;
     return;
   }
 
+  // Show typing indicator
   typingEl.classList.add('show');
   messagesEl.scrollTop = messagesEl.scrollHeight;
 
+  // Simulate AI thinking delay
   setTimeout(() => {
     typingEl.classList.remove('show');
     const response = getAiResponse(msg);
+
     const aiBubble = document.createElement('div');
     aiBubble.className = 'chat-msg ai';
-    aiBubble.innerHTML = response
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/\n/g,'<br>')
-      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+    // Render line breaks
+    aiBubble.innerHTML = response.split('\n').join('<br>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     messagesEl.appendChild(aiBubble);
     messagesEl.scrollTop = messagesEl.scrollHeight;
-  }, 800);
+  }, 900);
 }
 
 </script>
 
+
+
+<div id="expense-overflow-alert">
+  <div class="ov-box">
+    <span class="ov-emoji">&#x1F631;</span>
+    <div class="ov-title">Oops! Too Many Expenses!</div>
+    <div class="ov-msg">Your expenses <strong id="ov-exp">PKR 0</strong> have exceeded your opening balance of <strong id="ov-bal">PKR 0</strong>. Time to cut back!</div>
+    <div class="ov-chips">
+      <div class="ov-chip"><div class="cl">Opening Balance</div><div class="cv teal" id="ov-chip-bal">PKR 0</div></div>
+      <div class="ov-chip"><div class="cl">Total Expenses</div><div class="cv red" id="ov-chip-exp">PKR 0</div></div>
+    </div>
+    <button class="ov-cancel" onclick="dismissOverflow()">&#x2715; Cancel &mdash; Review My Spending</button>
+  </div>
+</div>
 </body></html>
